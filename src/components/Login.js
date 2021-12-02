@@ -9,6 +9,8 @@ function LoginPage() {
     const navigate = useNavigate();
   
     const {setLogin,
+        attempted,
+        setAttempted,
         uemail,
         setMail,
         pass,
@@ -16,6 +18,7 @@ function LoginPage() {
         token,
         setToken} = useContext(SocketContext);
   const login = async (e)=>{
+      setAttempted(false);
     if(uemail==="" || pass==="")
        alert('Enter all fields');
      else{
@@ -32,10 +35,15 @@ function LoginPage() {
         setLogin(true);
         navigate('/home')
         }).catch(err=>{
-          
+            setAttempted(true);
         })
       
      }
+   }
+
+
+   const gotoSingUp = ()=>{
+       navigate('/signup');
    }
    
    
@@ -51,8 +59,10 @@ function LoginPage() {
                   <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required=""  onChange={e => setMail(e.target.value)} value={uemail}/>
                   <label className="sr-only">Password</label>
                   <input type="password" id="inputPassword" className="form-control mt-3" placeholder="Password" required="" onChange={e=> setPass(e.target.value)} value={pass}/>
-              
-                  <button className="btn btn-lg btn-primary btn-block mt-5" type="submit" onClick={(e)=>login(e)}>Sign in</button>
+                  {attempted && <p className=" mt-2 mb-4 text-danger font-weight-normal" >Email or password incorrect</p>}
+                    
+                  <button className="btn btn-sm btn-primary btn-block mt-3 mb-4" type="submit" onClick={(e)=>login(e)}>Sign in</button>
+                  <button className="btn btn-dark btn-lg btn-block" onClick={gotoSingUp}>Sign Up</button>
             </form>
 
 

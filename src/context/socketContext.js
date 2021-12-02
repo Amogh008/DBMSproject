@@ -9,8 +9,8 @@ const ContextProvider = ({children})=>{
     const [LoggedIn,setLogin] = useState(false);
     const [uemail,setMail] = useState("");
    const [pass,setPass] = useState("");
-   const [token,setToken] = useState("this is token");
-   
+   const [token,setToken] = useState("");
+   const [attempted,setAttempted] = useState(false);
 
 
 
@@ -23,7 +23,9 @@ const ContextProvider = ({children})=>{
              pass,
              setPass,
              token,
-             setToken
+             setToken,
+             attempted,
+             setAttempted
 
                 
     
