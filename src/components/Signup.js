@@ -39,7 +39,7 @@ function Signup() {
     return (
         <div>
 <section className=" p-4" style={{"background-color": "#eee"}}>
-  <div className="container h-100 mb-5">
+  <div className="container h-100 mb-5"> 
     <div className="row d-flex justify-content-center align-items-center h-100">
       <div className="col-lg-12 col-xl-11">
         <div className="card text-black" style={{"border-radius": "25px"}}>
