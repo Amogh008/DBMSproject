@@ -1,27 +1,12 @@
-import {useContext} from 'react'
-import { useNavigate } from 'react-router';
-import { SocketContext } from './context/socketContext';
-import Naavbar from './components/Navbar';
+import Naavbar from "./components/Navbar";
+import Trips from "./components/Trips";
 function HomePage() {
-    
-    const navigate = useNavigate();
-  
-    const {token,setToken,setLogin} = useContext(SocketContext);
-  
-    const logout = ()=>{
-        setToken("");
-        setLogin(false);
-        return navigate('/login');
-
-      }
-    return (
-        <div>
-            <Naavbar/>
-            <h1>You are now LoggedIn</h1>
-        <h3>your token is : {token}</h3>
-        <a onClick={logout} href="/"><p>logout</p></a>
-        </div>
-    )
+  return (
+    <div className="mw-100">
+      <Naavbar />
+      <Trips />
+    </div>
+  );
 }
 
-export default HomePage
+export default HomePage;
