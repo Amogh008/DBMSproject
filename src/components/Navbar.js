@@ -2,9 +2,6 @@ import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 
 function Naavbar() {
-  const logout = () => {
-    window.location.reload();
-  };
   return (
     <div>
       <Navbar
@@ -34,7 +31,11 @@ function Naavbar() {
                 <NavDropdown.Item>Something</NavDropdown.Item>
                 <NavDropdown.Divider />
               </NavDropdown>
-              <Nav.Link className="text-danger ml-5" onClick={logout}>
+              <Nav.Link
+                className="text-danger ml-5"
+                href="/login"
+                // onClick={logout}
+              >
                 Logout
               </Nav.Link>
             </Nav>

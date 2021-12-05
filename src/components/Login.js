@@ -17,11 +17,12 @@ function LoginPage() {
     token,
     setToken,
   } = useContext(SocketContext);
+
   const login = async (e) => {
     setAttempted(false);
     if (uemail === "" || pass === "") alert("Enter all fields");
     else {
-      await Axios.post("http://192.168.17.87:8000/api/v1/users/login", {
+      await Axios.post("http://172.20.10.4:8000/api/v1/users/login", {
         email: uemail,
         password: pass,
       })

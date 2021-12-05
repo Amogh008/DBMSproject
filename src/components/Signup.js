@@ -23,7 +23,7 @@ function Signup() {
       alert("Enter all the fields");
     } else {
       await axios
-        .post("http://192.168.17.148:8000/api/v1/users/signup", {
+        .post("http://172.20.10.4:8000/api/v1/users/signup", {
           name: userName,
           email: newEmail,
           password: newPass,
