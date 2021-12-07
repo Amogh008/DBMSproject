@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { SocketContext } from "../context/socketContext";
 
 function TripDetail() {
@@ -20,7 +21,7 @@ function TripDetail() {
         .then((res) => {
           console.log(res.data.data.tour);
           setTrip(res.data.data.tour);
-          setDate(trip.startDate.split("T")[0].split("").reverse().join(""));
+          setDate(trip.startDate.split("T")[0].split("-").reverse().join("-"));
           setDate(date.reverse());
         })
         .catch((err) => {});
@@ -49,55 +50,32 @@ function TripDetail() {
         <div className="row justify-content-center">
           <div className="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
             <div className="card border-0 shadow">
-              <img
-                src="https://cdn.pixabay.com/photo/2021/11/18/22/08/flower-6807516__340.jpg"
-                alt="..."
-              />
+              <img src={`${organizer.imageUrl}`} alt="..." />
               <div className="card-body p-1-9 p-xl-5">
                 <div className="mb-4">
-                  <h3 className="h4 mb-0">{organizer.name}</h3>
+                  <Link to={`/userdetails/${organizer._id}`}>
+                    <h3 className="h4 mb-0">{organizer.name}</h3>
+                  </Link>
                   {/* <span className="text-primary">CEO &amp; Founder</span> */}
                 </div>
                 <ul className="list-unstyled mb-4">
                   <li className="mb-3">
-                    <a href="#!">
+                    <p href="#!">
                       <i className="far fa-envelope display-25 me-3 text-secondary"></i>
                       {organizer.email}
-                    </a>
+                    </p>
                   </li>
                   <li className="mb-3">
-                    <a href="#!">
+                    <p href="#!">
                       <i className="fas fa-mobile-alt display-25 me-3 text-secondary"></i>
-                      +012 (345) 6789
-                    </a>
+                      {organizer.phNo}
+                    </p>
                   </li>
                   <li>
-                    <a href="#!">
+                    <p href="#!">
                       <i className="fas fa-map-marker-alt display-25 me-3 text-secondary"></i>
-                      205 Main Street, USA
-                    </a>
-                  </li>
-                </ul>
-                <ul className="social-icon-style2 ps-0">
-                  <li>
-                    <a href="#!" className="rounded-3">
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#!" className="rounded-3">
-                      <i className="fab fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#!" className="rounded-3">
-                      <i className="fab fa-youtube"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#!" className="rounded-3">
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
+                      {organizer.address}
+                    </p>
                   </li>
                 </ul>
               </div>
@@ -108,7 +86,7 @@ function TripDetail() {
               <div className="mb-5 wow fadeIn">
                 <div className="text-start mb-1-6 wow fadeIn">
                   <h2 className="h1 mb-0 text-primary">
-                    {trip.source} to {trip.destination}
+                    {trip.source} -----> {trip.destination}
                   </h2>
                 </div>
                 <p>{trip.description}</p>
@@ -136,11 +114,9 @@ function TripDetail() {
                   </div>
                   <div className="custom-progress progress rounded-3 mb-4">
                     <div
-                      className="animated custom-bar progress-bar bg-secondary slideInLeft"
+                      className="animated custom-bar progress-bar bg-success slideInLeft"
                       style={{
-                        width: `${
-                          (trip.maxSeats - trip.seatsLeft / trip.maxSeats) * 100
-                        }%`,
+                        width: `${(trip.seatsLeft / trip.maxSeats) * 100}%`,
                       }}
                       aria-valuemax="100"
                       aria-valuemin="0"

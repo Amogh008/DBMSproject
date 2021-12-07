@@ -46,14 +46,17 @@ function Trips() {
               respond(e);
             }}
           >
-            <Card.Header>Header</Card.Header>
-            <Card.Body>
-              <Card.Title>
-                {variant.source} to {variant.destination}
+            <Card.Header>
+              {variant.source} ------> {variant.destination}
+            </Card.Header>
+            <Card.Body className="bg-secondary">
+              <Card.Title></Card.Title>
+              <Card.Title className="text-warning">
+                {variant.startDate.split("T")[0].split("-").reverse().join("-")}
               </Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+              <Card.Text>{variant.description}</Card.Text>
+              <Card.Text className="text-warning">
+                Seats remaining: {variant.seatsLeft}/{variant.maxSeats}
               </Card.Text>
             </Card.Body>
           </Card>

@@ -5,8 +5,9 @@ import Signup from "./components/Signup";
 import TripDetail from "./components/TripDetail";
 import { useContext } from "react";
 import { SocketContext } from "./context/socketContext";
-import DateCheck from "./components/DateCheck.js";
 import Navbar from "./components/Navbar";
+import UserDetails from "./components/UserDetails";
+import CreateTrip from "./components/CreateTrip";
 
 function App() {
   const { LoggedIn } = useContext(SocketContext);
@@ -19,8 +20,9 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/datecheck" element={<DateCheck />}></Route>
+            <Route path="/userdetails/:id" element={<UserDetails />}></Route>
             <Route path="/tripdetail/:id" element={<TripDetail />}></Route>
+            <Route path="/createtrip" element={<CreateTrip />}></Route>
           </Routes>
         </div>
       </Router>
