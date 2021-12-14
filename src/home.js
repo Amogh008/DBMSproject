@@ -10,7 +10,7 @@ function HomePage() {
     }
   });
   const navigate = useNavigate();
-  const { LoggedIn, token } = useContext(SocketContext);
+  const { token } = useContext(SocketContext);
 
   return (
     <div className="mw-100">

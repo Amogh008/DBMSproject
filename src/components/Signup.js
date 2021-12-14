@@ -126,7 +126,87 @@ function Signup() {
                               onChange={(e) => setCnfPass(e.target.value)}
                             />
                             <label className="form-label" for="form3Example4cd">
-                              Repeat your password
+                              Confirm Password
+                            </label>
+                          </div>
+                        </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input
+                              type="password"
+                              id="form3Example4cd"
+                              className="form-control"
+                              value={newCnfPass}
+                              onChange={(e) => setCnfPass(e.target.value)}
+                            />
+                            <label className="form-label" for="form3Example4cd">
+                              Address
+                            </label>
+                          </div>
+                        </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input
+                              type="password"
+                              id="form3Example4cd"
+                              className="form-control"
+                              value={newCnfPass}
+                              onChange={(e) => setCnfPass(e.target.value)}
+                            />
+                            <label className="form-label" for="form3Example4cd">
+                              Occupation
+                            </label>
+                          </div>
+                        </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input
+                              type="password"
+                              id="form3Example4cd"
+                              className="form-control"
+                              value={newCnfPass}
+                              onChange={(e) => setCnfPass(e.target.value)}
+                            />
+                            <label className="form-label" for="form3Example4cd">
+                              DL number
+                            </label>
+                          </div>
+                        </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input
+                              type="password"
+                              id="form3Example4cd"
+                              className="form-control"
+                              value={newCnfPass}
+                              onChange={(e) => setCnfPass(e.target.value)}
+                            />
+                            <label className="form-label" for="form3Example4cd">
+                              Gender
+                            </label>
+                          </div>
+                        </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input
+                              type="password"
+                              id="form3Example4cd"
+                              className="form-control"
+                              value={newCnfPass}
+                              onChange={(e) => setCnfPass(e.target.value)}
+                            />
+                            <label className="form-label" for="form3Example4cd">
+                              Phone number
                             </label>
                           </div>
                         </div>

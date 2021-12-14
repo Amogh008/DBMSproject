@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Naavbar() {
@@ -7,7 +6,7 @@ function Naavbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link to="/home">
-          <p className="navbar-brand">Navbar</p>
+          <p className="navbar-brand">CarPOOLING</p>
         </Link>
         <button
           className="navbar-toggler"
@@ -22,25 +21,25 @@ function Naavbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                Home <span className="sr-only">(current)</span>
-              </a>
+            <li className="nav-item ml-3">
+              <Link to="/home">
+                <p>Home</p>
+              </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Features
-              </a>
+            <li className="nav-item ml-3">
+              <Link to="/schedule">
+                <p>Schedule</p>
+              </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Pricing
-              </a>
+            <li className="nav-item ml-3">
+              <Link to="/MyTrips">
+                <p>MyTrips</p>
+              </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/login">
-                Logout
-              </a>
+            <li className="nav-item ml-3">
+              <Link to="/login" className="text-danger">
+                <p>logout</p>
+              </Link>
             </li>
           </ul>
         </div>

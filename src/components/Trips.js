@@ -10,7 +10,7 @@ function Trips() {
   useEffect(() => {
     const fetch = async () => {
       await axios
-        .get("http://172.20.10.4:8000/api/v1/tours", {
+        .get("http://localhost:8000/api/v1/tours", {
           headers: {
             token: token,
           },
@@ -32,7 +32,7 @@ function Trips() {
   return (
     <div>
       <div className="row p-3">
-        {trips.map((variant, idx) => (
+        {trips.map((variant) => (
           <div className="">
             <Link
               to={`/tripdetail/${variant._id}`}
