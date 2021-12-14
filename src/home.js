@@ -1,14 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Trips from "./components/Trips";
 import { SocketContext } from "./context/socketContext";
 
 function HomePage() {
-  const { LoggedIn } = useContext(SocketContext);
+  useEffect(() => {
+    if (token === "") {
+      navigate("/login");
+    }
+  });
   const navigate = useNavigate();
-  if (!LoggedIn) {
-    navigate("/login");
-  }
+  const { LoggedIn, token } = useContext(SocketContext);
+
   return (
     <div className="mw-100">
       <Trips />

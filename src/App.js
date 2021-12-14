@@ -13,8 +13,8 @@ function App() {
   const { LoggedIn } = useContext(SocketContext);
   return (
     <div>
-      {LoggedIn && <Navbar />}
       <Router>
+        {LoggedIn && <Navbar />}
         <div className="mw-100">
           <Routes>
             <Route path="/login" element={<Login />}></Route>

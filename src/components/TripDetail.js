@@ -42,7 +42,7 @@ function TripDetail() {
         .catch((err) => {});
     };
     fetchUser();
-  }, [token, id, trip.creatorId]);
+  }, [token, id, trip.creatorId, trip.startDate, date]);
 
   return (
     <div>
@@ -86,7 +86,9 @@ function TripDetail() {
               <div className="mb-5 wow fadeIn">
                 <div className="text-start mb-1-6 wow fadeIn">
                   <h2 className="h1 mb-0 text-primary">
-                    {trip.source} -----> {trip.destination}
+                    {trip.source}
+                    {" ------> "}
+                    {trip.destination}
                   </h2>
                 </div>
                 <p>{trip.description}</p>

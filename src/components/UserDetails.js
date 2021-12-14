@@ -21,7 +21,7 @@ function UserDetails() {
         .catch((err) => {});
     };
     fetchUser();
-  }, [token]);
+  }, [token, para.id]);
   return (
     <div>
       <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
