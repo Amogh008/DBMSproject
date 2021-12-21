@@ -8,6 +8,7 @@ function DateCheck() {
   const logDate = () => {
     console.log(date);
     setDates([...dates, date]);
+    console.log("hello");
   };
 
   return (
