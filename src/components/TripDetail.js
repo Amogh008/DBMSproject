@@ -19,7 +19,6 @@ function TripDetail() {
           },
         })
         .then((res) => {
-          console.log(res.data.data.tour);
           setTrip(res.data.data.tour);
           setDate(trip.startDate.split("T")[0].split("-").reverse().join("-"));
           setDate(date.reverse());
@@ -36,7 +35,6 @@ function TripDetail() {
           },
         })
         .then((res) => {
-          console.log(res.data.data.person);
           setOrganizer(res.data.data.person);
         })
         .catch((err) => {});
@@ -56,7 +54,6 @@ function TripDetail() {
                   <Link to={`/userdetails/${organizer._id}`}>
                     <h3 className="h4 mb-0">{organizer.name}</h3>
                   </Link>
-                  {/* <span className="text-primary">CEO &amp; Founder</span> */}
                 </div>
                 <ul className="list-unstyled mb-4">
                   <li className="mb-3">

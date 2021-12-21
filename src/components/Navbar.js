@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SocketContext } from "../context/socketContext";
 
 function Naavbar() {
-  const { setLogin } = useContext(SocketContext);
+  const { userId } = useContext(SocketContext);
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,6 +36,11 @@ function Naavbar() {
             <li className="nav-item ml-3">
               <Link to="/MyTrips">
                 <p>Upcomming</p>
+              </Link>
+            </li>
+            <li className="nav-item ml-3">
+              <Link to={`/userdetails/${userId}`}>
+                <p>MyDetails</p>
               </Link>
             </li>
             <li className="nav-item ml-3">

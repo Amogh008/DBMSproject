@@ -8,7 +8,7 @@ const ContextProvider = ({ children }) => {
   const [pass, setPass] = useState("");
   const [token, setToken] = useState("");
   const [attempted, setAttempted] = useState(false);
-
+  const [userId, setId] = useState("");
   return (
     <SocketContext.Provider
       value={{
@@ -22,6 +22,8 @@ const ContextProvider = ({ children }) => {
         setToken,
         attempted,
         setAttempted,
+        userId,
+        setId,
       }}
     >
       {children}

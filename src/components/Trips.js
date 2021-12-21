@@ -10,7 +10,7 @@ function Trips() {
   useEffect(() => {
     const fetch = async () => {
       await axios
-        .get("http://172.20.10.4:8000/api/v1/tours", {
+        .get("http://172.20.10.4:8000/api/v1/tours?sort=startDate", {
           headers: {
             token: token,
           },

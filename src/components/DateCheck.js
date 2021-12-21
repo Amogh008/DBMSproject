@@ -4,10 +4,10 @@ import { Form } from "react-bootstrap";
 
 function DateCheck() {
   const [date, setDate] = useState("0000-00-00");
-  const [dates, setDates] = useState([]);
+
   const logDate = () => {
     console.log(date);
-    setDates([...dates, date]);
+
     console.log("hello");
   };
 
@@ -35,11 +35,6 @@ function DateCheck() {
             </Form.Group>
           </div>
         </div>
-      </div>
-      <div>
-        {dates.map((el) => (
-          <h4>{el}</h4>
-        ))}
       </div>
     </div>
   );

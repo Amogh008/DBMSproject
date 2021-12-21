@@ -16,6 +16,7 @@ function LoginPage() {
     setPass,
     token,
     setToken,
+    setId,
   } = useContext(SocketContext);
 
   const login = async (e) => {
@@ -27,6 +28,8 @@ function LoginPage() {
         password: pass,
       })
         .then((res) => {
+          setId(res.data.user);
+
           setToken(res.data.token);
           console.log(token);
           setLogin(true);

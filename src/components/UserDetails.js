@@ -4,7 +4,7 @@ import { SocketContext } from "../context/socketContext";
 import axios from "axios";
 function UserDetails() {
   const [organizer, setOrganizer] = useState({});
-  const { token } = useContext(SocketContext);
+  const { token, userId } = useContext(SocketContext);
   const para = useParams();
   useEffect(() => {
     const fetchUser = async () => {
@@ -66,9 +66,11 @@ function UserDetails() {
               <h3 className="join">{`${organizer.gender}`}</h3>
             </div>
             <div className=" d-flex mt-2">
-              <button className="btn1 btn-dark">
-                <h3>Review user</h3>
-              </button>
+              {userId !== para.id && (
+                <button className="btn1 btn-dark">
+                  <h3>Review user</h3>
+                </button>
+              )}
             </div>
           </div>
         </div>
