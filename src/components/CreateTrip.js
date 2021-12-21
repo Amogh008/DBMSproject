@@ -1,11 +1,12 @@
-import React from "react";
-import Navbar from "./Navbar";
+import React, { useState } from "react";
+
 function CreateTrip() {
-  return (
-    <div>
-      <Navbar />
-    </div>
-  );
+  const [source] = useState("");
+  const [dest] = useState("");
+  const [reason] = useState("");
+  const [rules] = useState("");
+  const [] = useState("");
+  return <div>Welcome to CreateTrip</div>;
 }
 
 export default CreateTrip;

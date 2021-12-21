@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { SocketContext } from "../context/socketContext";
 
 function Naavbar() {
+  const { setLogin } = useContext(SocketContext);
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,18 +30,18 @@ function Naavbar() {
             </li>
             <li className="nav-item ml-3">
               <Link to="/schedule">
-                <p>Schedule</p>
+                <p>Create</p>
               </Link>
             </li>
             <li className="nav-item ml-3">
               <Link to="/MyTrips">
-                <p>MyTrips</p>
+                <p>Upcomming</p>
               </Link>
             </li>
             <li className="nav-item ml-3">
-              <Link to="/login" className="text-danger">
+              <a href="/login" className="text-danger">
                 <p>logout</p>
-              </Link>
+              </a>
             </li>
           </ul>
         </div>

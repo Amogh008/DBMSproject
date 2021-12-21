@@ -9,7 +9,7 @@ function UserDetails() {
   useEffect(() => {
     const fetchUser = async () => {
       await axios
-        .get(`http://localhost:8000/api/v1/users/${para.id}`, {
+        .get(`http://172.20.10.4:8000/api/v1/users/${para.id}`, {
           headers: {
             token: token,
           },

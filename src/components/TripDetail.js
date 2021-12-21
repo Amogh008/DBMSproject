@@ -13,7 +13,7 @@ function TripDetail() {
   useEffect(() => {
     const fetch = async () => {
       await axios
-        .get(`http://localhost:8000/api/v1/tours/${id}`, {
+        .get(`http://172.20.10.4:8000/api/v1/tours/${id}`, {
           headers: {
             token: token,
           },
@@ -30,7 +30,7 @@ function TripDetail() {
 
     const fetchUser = async () => {
       await axios
-        .get(`http://localhost:8000/api/v1/users/${trip.creatorId}`, {
+        .get(`http://172.20.10.4:8000/api/v1/users/${trip.creatorId}`, {
           headers: {
             token: token,
           },

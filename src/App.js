@@ -18,11 +18,12 @@ function App() {
         <div className="mw-100">
           <Routes>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/" element={<Login />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/userdetails/:id" element={<UserDetails />}></Route>
             <Route path="/tripdetail/:id" element={<TripDetail />}></Route>
-            <Route path="/createtrip" element={<CreateTrip />}></Route>
+            <Route path="/schedule" element={<CreateTrip />}></Route>
           </Routes>
         </div>
       </Router>
