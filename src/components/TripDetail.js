@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 function TripDetail() {
   const { token, userId } = useContext(SocketContext);
   const id = useParams().id;
-  const [trip, setTrip] = useState({});
+  const [trip, setTrip] = useState({
+    source: "source",
+    destination: "destination",
+    description: "description",
+  });
   const [organizer, setOrganizer] = useState({});
   const [date, setDate] = useState("");
 
@@ -51,15 +55,22 @@ function TripDetail() {
   }, [token, id, trip.creatorId, trip.startDate, date, navigate]);
 
   const bookTrip = async () => {
-    axios.patch(
-      `http://172.20.10.4:8000/api/v1/tours/${trip._id}`,
-      {},
-      {
-        headers: {
-          token: token,
-        },
-      }
-    );
+    await axios
+      .patch(
+        `http://172.20.10.4:8000/api/v1/tours/${trip._id}`,
+        {},
+        {
+          headers: {
+            token: token,
+          },
+        }
+      )
+      .then((res) => {
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert("Error!");
+      });
   };
 
   const deleteTour = async () => {
@@ -84,31 +95,40 @@ function TripDetail() {
 
   return (
     <div>
-      <div className="container my-5">
+      <div className="container my-5" style={{ "text-align": "center" }}>
         <div className="row justify-content-center">
-          <div className="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
+          <div
+            className="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn "
+            style={{ "text-align": "center" }}
+          >
             <div className="card border-0 shadow">
-              <img src={`${organizer.imageUrl}`} alt="..." />
+              <img
+                src={`https://www.w3schools.com/howto/img_avatar.png`}
+                alt="..."
+                style={{ height: "auto ", width: "100%" }}
+              />
               <div className="card-body p-1-9 p-xl-5">
                 <div className="mb-4">
                   <Link to={`/userdetails/${organizer._id}`}>
-                    <h3 className="h4 mb-0">{organizer.name}</h3>
+                    <h1 className="h1 mb-0 font-weight-bold">
+                      {organizer.name}
+                    </h1>
                   </Link>
                 </div>
                 <ul className="list-unstyled mb-4">
-                  <li className="mb-3">
+                  <li className=" text-danger mb-3">
                     <p href="#!">
                       <i className="far fa-envelope display-25 me-3 text-secondary"></i>
                       {organizer.email}
                     </p>
                   </li>
-                  <li className="mb-3">
+                  <li className="h4 mb-3">
                     <p href="#!">
                       <i className="fas fa-mobile-alt display-25 me-3 text-secondary"></i>
                       {organizer.phNo}
                     </p>
                   </li>
-                  <li>
+                  <li className="h4 ">
                     <p href="#!">
                       <i className="fas fa-map-marker-alt display-25 me-3 text-secondary"></i>
                       {organizer.address}
@@ -122,45 +142,65 @@ function TripDetail() {
             <div className="ps-lg-1-6 ps-xl-5">
               <div className="mb-5 wow fadeIn">
                 <div className="text-start mb-1-6 wow fadeIn">
-                  <h2 className="h1 mb-0 text-primary">
-                    {trip.source}
-                    {"  ----->  "}
-                    {trip.destination}
+                  <h2
+                    className="h1 mb-0 text-primary font-weight-bold"
+                    style={{ "text-align": "center" }}
+                  >
+                    {trip.source[0].toUpperCase() + trip.source.substring(1)}
+                    <br />
+                    <span className="text-danger">
+                      {"|"}
+                      <br />
+                      {"\\/"}
+                    </span>
+                    <br />
+                    {trip.destination[0].toUpperCase() +
+                      trip.destination.substring(1)}
                   </h2>
                 </div>
-                <p className="my-4">{trip.description}</p>
+                <h4 className="h2 my-4">
+                  {trip.description[0].toUpperCase() +
+                    trip.description.substring(1)}
+                </h4>
               </div>
 
               <div className="wow fadeIn">
                 <div className="text-start mb-1-6 wow fadeIn">
                   <h2 className="mb-0 text-primary">Date: {date}</h2>
                 </div>
+
+                {organizer._id !== userId ? (
+                  <button
+                    type="button"
+                    className="mt-4 mb-0 btn btn-primary btn-lg"
+                    onClick={bookTrip}
+                  >
+                    Book Trip
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="mt-4 mb-0  btn btn-danger btn-lg"
+                    onClick={deleteTour}
+                  >
+                    Cancel Trip
+                  </button>
+                )}
+
                 <div className="my-4">
                   <div
                     className="d-flex justify-content-center mx-2 mb-3"
                     onClick={bookTrip}
-                  >
-                    {organizer._id !== userId ? (
-                      <button type="button" className="btn btn-primary btn-lg">
-                        Book Trip
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-lg"
-                        onClick={deleteTour}
-                      >
-                        Cancel Trip
-                      </button>
-                    )}
-                  </div>
+                  ></div>
                 </div>
-                <div className="progress-style1">
+                <div className="progress-style1" style={{ width: "100%" }}>
                   <div className="progress-text">
                     <div className="row">
-                      <div className="col-6 fw-bold">Seat Availability</div>
-                      <div className="col-6 text-end">
-                        {trip.seatsLeft} / {trip.maxSeats}
+                      <div className="col-6 fw-bold" style={{ width: "100%" }}>
+                        Seat Availability :{" "}
+                        <span className="col-6">
+                          {trip.seatsLeft} / {trip.maxSeats}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -178,8 +218,11 @@ function TripDetail() {
                   </div>
                   <div className="progress-text">
                     <div className="row">
-                      <div className="col-6 fw-bold">User Rating</div>
-                      <div className="col-6 text-end">{trip.maxSeats} / 5</div>
+                      <div className="col-6 fw-bold">
+                        User Rating :{" "}
+                        <span className="col-6">{trip.maxSeats} / 5</span>
+                      </div>
+                      <div className="col-6 text-end"></div>
                     </div>
                   </div>
                   <div className="custom-progress progress rounded-3 mb-4">

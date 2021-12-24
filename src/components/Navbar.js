@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { SocketContext } from "../context/socketContext";
-
+import "./../App.css";
 function Naavbar() {
   const { userId } = useContext(SocketContext);
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <div className="App">
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
         <Link to="/home">
-          <p className="navbar-brand">CarPOOLING</p>
+          <h2 className="navbar-brand" style={{ color: "white" }}>
+            CarPOOLING
+          </h2>
         </Link>
         <button
           className="navbar-toggler"

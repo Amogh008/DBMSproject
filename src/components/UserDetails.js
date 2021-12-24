@@ -35,10 +35,8 @@ function UserDetails() {
   }, [token, para.id]);
 
   const changePhone = async () => {
-    let loop = true;
-    while (loop) {
-      let phone = window.prompt("Enter the phone number:");
-
+    let phone = window.prompt("Enter the phone number:");
+    if (phone != null) {
       if (phone.length !== 10) {
         alert("Enter a propper number!");
       } else {
@@ -58,25 +56,26 @@ function UserDetails() {
           .catch((err) => {
             alert("error");
           });
-        loop = false;
       }
+    } else {
+      alert("Canceled!");
     }
   };
   return (
     <div>
       <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
-        <div className="card p-4">
+        <div className="card p-4 " style={{ "border-radius": "30px" }}>
           <div className=" image d-flex flex-column justify-content-center align-items-center">
-            <button className="btn btn-secondary">
-              <img
-                src={`${organizer.imageUrl}`}
-                height="100"
-                width="100"
-                alt=""
-              />
-            </button>
-            <h1 className="name mt-3">{organizer.name}</h1>
-            <p className="idd">{organizer.email}</p>
+            <img
+              src={`https://www.w3schools.com/howto/img_avatar.png`}
+              height="150"
+              width="150"
+              alt=""
+              style={{ "border-radius": "50%" }}
+            />
+
+            <h1 className="name mt-3 text-danger">{organizer.name}</h1>
+            <p className="idd text-primary">{organizer.email}</p>
             <div className="d-flex flex-row justify-content-center align-items-center gap-2">
               <h3 className="idd1">{organizer.phNo}</h3>
               <span>
@@ -85,7 +84,7 @@ function UserDetails() {
             </div>
             <div className="d-flex flex-row justify-content-center align-items-center mt-3">
               <span className="number">
-                <h3 className="follow">Dl: {organizer.dlNo}</h3>
+                <h3 className="follow">DL No: {organizer.dlNo}</h3>
               </span>
             </div>
 
@@ -94,25 +93,25 @@ function UserDetails() {
                 <h4>{`${organizer.occupation}`}</h4>
               </span>
             </div>
-            <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
-              <span>
-                <i className="fa fa-twitter"></i>
-              </span>
-              <span>
-                <i className="fa fa-facebook-f"></i>
-              </span>
-            </div>
-            <div className=" px-2 rounded mt-4 date ">
+
+            <div className=" px-2 rounded mt-2 date ">
               <h3 className="join">{`${organizer.gender}`}</h3>
             </div>
             <div className=" d-flex mt-2">
               {userId !== para.id && (
-                <button className="btn1 btn-dark">
+                <button
+                  className="btn1 btn-primary"
+                  style={{ "border-radius": "10px" }}
+                >
                   <h3>Review user</h3>
                 </button>
               )}
               {userId === para.id && (
-                <button className="btn1 btn-dark" onClick={changePhone}>
+                <button
+                  className="btn1 btn-primary"
+                  onClick={changePhone}
+                  style={{ "border-radius": "10px" }}
+                >
                   <h3>Change Phone Number</h3>
                 </button>
               )}

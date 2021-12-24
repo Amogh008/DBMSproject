@@ -8,14 +8,14 @@ import { SocketContext } from "./context/socketContext";
 import Navbar from "./components/Navbar";
 import UserDetails from "./components/UserDetails";
 import CreateTrip from "./components/CreateTrip";
-
+import "./App.css";
 function App() {
   const { LoggedIn } = useContext(SocketContext);
   return (
     <div>
       <Router>
         {LoggedIn && <Navbar />}
-        <div className="mw-100">
+        <div className="mw-100 App">
           <Routes>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/" element={<Login />}></Route>
