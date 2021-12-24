@@ -2,10 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { SocketContext } from "../context/socketContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 function UserDetails() {
+  const navigate = useNavigate();
   const [organizer, setOrganizer] = useState({});
   const { token, userId } = useContext(SocketContext);
   const para = useParams();
+  useEffect(() => {
+    const check = () => {
+      if (token === "") {
+        navigate("/login");
+      }
+    };
+    check();
+  });
   useEffect(() => {
     const fetchUser = async () => {
       await axios
@@ -22,6 +33,35 @@ function UserDetails() {
     };
     fetchUser();
   }, [token, para.id]);
+
+  const changePhone = async () => {
+    let loop = true;
+    while (loop) {
+      let phone = window.prompt("Enter the phone number:");
+
+      if (phone.length !== 10) {
+        alert("Enter a propper number!");
+      } else {
+        await axios
+          .patch(
+            `http://172.20.10.4:8000/api/v1/users/${userId}`,
+            {
+              phNo: phone,
+            },
+            {
+              headers: { token },
+            }
+          )
+          .then((res) => {
+            navigate(`/home`);
+          })
+          .catch((err) => {
+            alert("error");
+          });
+        loop = false;
+      }
+    }
+  };
   return (
     <div>
       <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
@@ -69,6 +109,11 @@ function UserDetails() {
               {userId !== para.id && (
                 <button className="btn1 btn-dark">
                   <h3>Review user</h3>
+                </button>
+              )}
+              {userId === para.id && (
+                <button className="btn1 btn-dark" onClick={changePhone}>
+                  <h3>Change Phone Number</h3>
                 </button>
               )}
             </div>

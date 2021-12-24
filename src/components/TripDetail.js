@@ -3,14 +3,22 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { SocketContext } from "../context/socketContext";
-
+import { useNavigate } from "react-router-dom";
 function TripDetail() {
-  const { token } = useContext(SocketContext);
+  const { token, userId } = useContext(SocketContext);
   const id = useParams().id;
   const [trip, setTrip] = useState({});
   const [organizer, setOrganizer] = useState({});
   const [date, setDate] = useState("");
+
+  const navigate = useNavigate();
   useEffect(() => {
+    const check = () => {
+      if (token === "") {
+        navigate("/login");
+      }
+    };
+    check();
     const fetch = async () => {
       await axios
         .get(`http://172.20.10.4:8000/api/v1/tours/${id}`, {
@@ -40,7 +48,39 @@ function TripDetail() {
         .catch((err) => {});
     };
     fetchUser();
-  }, [token, id, trip.creatorId, trip.startDate, date]);
+  }, [token, id, trip.creatorId, trip.startDate, date, navigate]);
+
+  const bookTrip = async () => {
+    axios.patch(
+      `http://172.20.10.4:8000/api/v1/tours/${trip._id}`,
+      {},
+      {
+        headers: {
+          token: token,
+        },
+      }
+    );
+  };
+
+  const deleteTour = async () => {
+    await axios
+      .delete(
+        `http://172.20.10.4:8000/api/v1/tours/${trip._id}`,
+        {},
+        {
+          headers: {
+            token: token,
+          },
+        }
+      )
+      .then((res) => {
+        alert("Deleted successfully!!");
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert("error");
+      });
+  };
 
   return (
     <div>
@@ -84,24 +124,37 @@ function TripDetail() {
                 <div className="text-start mb-1-6 wow fadeIn">
                   <h2 className="h1 mb-0 text-primary">
                     {trip.source}
-                    {" ------> "}
+                    {"  ----->  "}
                     {trip.destination}
                   </h2>
                 </div>
-                <p>{trip.description}</p>
+                <p className="my-4">{trip.description}</p>
               </div>
 
               <div className="wow fadeIn">
                 <div className="text-start mb-1-6 wow fadeIn">
-                  <h2 className="mb-0 text-primary">{date}</h2>
+                  <h2 className="mb-0 text-primary">Date: {date}</h2>
                 </div>
-                <p className="mb-4">
-                  Many desktop publishing packages and web page editors now use
-                  Lorem Ipsum as their default model text, and a search for
-                  'lorem ipsum' will uncover many web sites still in their
-                  infancy. Various versions have evolved over the years,
-                  sometimes by accident, sometimes on purpose.
-                </p>
+                <div className="my-4">
+                  <div
+                    className="d-flex justify-content-center mx-2 mb-3"
+                    onClick={bookTrip}
+                  >
+                    {organizer._id !== userId ? (
+                      <button type="button" className="btn btn-primary btn-lg">
+                        Book Trip
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-lg"
+                        onClick={deleteTour}
+                      >
+                        Cancel Trip
+                      </button>
+                    )}
+                  </div>
+                </div>
                 <div className="progress-style1">
                   <div className="progress-text">
                     <div className="row">

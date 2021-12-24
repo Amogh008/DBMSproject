@@ -10,7 +10,7 @@ function Trips() {
   useEffect(() => {
     const fetch = async () => {
       await axios
-        .get("http://172.20.10.4:8000/api/v1/tours?sort=startDate", {
+        .get("http://172.20.10.4:8000/api/v1/tours", {
           headers: {
             token: token,
           },
@@ -33,10 +33,10 @@ function Trips() {
     <div>
       <div className="row p-3">
         {trips.map((variant) => (
-          <div className="">
+          <div className="col-12  col-md-6 col-lg-4 col-xl-3  m-auto ">
             <Link
               to={`/tripdetail/${variant._id}`}
-              className="mx-auto my-4 nav-link "
+              className="mx-auto my-4 nav-link d-flex justify-content-center"
               key={variant._id}
             >
               <Card
