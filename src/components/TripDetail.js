@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { SocketContext } from "../context/socketContext";
 import { useNavigate } from "react-router-dom";
 function TripDetail() {
-  const { token, userId, setBooked } = useContext(SocketContext);
+  const { token, userId, setBooked, setCreated, userBooked } =
+    useContext(SocketContext);
   const id = useParams().id;
   const [trip, setTrip] = useState({
     source: "source",
@@ -88,7 +89,28 @@ function TripDetail() {
       )
       .then((res) => {
         alert("Deleted successfully!!");
-        navigate("/home");
+        setCreated(res.data.data.upUser.created);
+        navigate("/createdTrips");
+      })
+      .catch((err) => {
+        alert("error");
+      });
+  };
+  const cancelBooking = async () => {
+    await axios
+      .patch(
+        `http://172.20.10.4:8000/api/v1/tours/cancelBooking/${trip._id}/${userId}`,
+        {},
+        {
+          headers: {
+            token: token,
+          },
+        }
+      )
+      .then((res) => {
+        alert("Booking Cancelled");
+        setBooked(res.data.data.upUser.created);
+        navigate("/bookedtrips");
       })
       .catch((err) => {
         alert("error");
@@ -171,15 +193,27 @@ function TripDetail() {
                   <h2 className="mb-0 text-primary">Date: {date}</h2>
                 </div>
 
-                {organizer._id !== userId ? (
-                  <button
-                    type="button"
-                    className="mt-4 mb-0 btn btn-primary btn-lg"
-                    onClick={bookTrip}
-                  >
-                    Book Trip
-                  </button>
-                ) : (
+                {userBooked.indexOf(trip._id) !== -1 &&
+                  organizer._id !== userId && (
+                    <button
+                      type="button"
+                      className="mt-4 mb-0  btn btn-warning btn-lg"
+                      onClick={cancelBooking}
+                    >
+                      Cancel Booking
+                    </button>
+                  )}
+                {userBooked.indexOf(trip._id) === -1 &&
+                  organizer._id !== userId && (
+                    <button
+                      type="button"
+                      className="mt-4 mb-0 btn btn-primary btn-lg"
+                      onClick={bookTrip}
+                    >
+                      Book Trip
+                    </button>
+                  )}
+                {organizer._id === userId && (
                   <button
                     type="button"
                     className="mt-4 mb-0  btn btn-danger btn-lg"

@@ -10,11 +10,14 @@ function Trips() {
   useEffect(() => {
     const fetch = async () => {
       await axios
-        .get("http://172.20.10.4:8000/api/v1/tours", {
-          headers: {
-            token: token,
-          },
-        })
+        .get(
+          "http://172.20.10.4:8000/api/v1/tours?sort=startDate&seatsLeft[gte]=0",
+          {
+            headers: {
+              token: token,
+            },
+          }
+        )
         .then((res) => {
           setTrips(res.data.data.tours);
         })
