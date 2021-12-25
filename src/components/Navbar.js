@@ -36,8 +36,13 @@ function Naavbar() {
               </Link>
             </li>
             <li className="nav-item ml-3">
-              <Link to="/MyTrips">
-                <p>Upcomming</p>
+              <Link to="/bookedtrips">
+                <p>Booked</p>
+              </Link>
+            </li>
+            <li className="nav-item ml-3">
+              <Link to="/createdtrips">
+                <p>Created</p>
               </Link>
             </li>
             <li className="nav-item ml-3">

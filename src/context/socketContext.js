@@ -9,9 +9,15 @@ const ContextProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [attempted, setAttempted] = useState(false);
   const [userId, setId] = useState("");
+  const [userBooked, setBooked] = useState([]);
+  const [created, setCreated] = useState([]);
   return (
     <SocketContext.Provider
       value={{
+        created,
+        setCreated,
+        userBooked,
+        setBooked,
         LoggedIn,
         setLogin,
         uemail,

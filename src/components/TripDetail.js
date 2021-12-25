@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { SocketContext } from "../context/socketContext";
 import { useNavigate } from "react-router-dom";
 function TripDetail() {
-  const { token, userId } = useContext(SocketContext);
+  const { token, userId, setBooked } = useContext(SocketContext);
   const id = useParams().id;
   const [trip, setTrip] = useState({
     source: "source",
@@ -58,7 +58,7 @@ function TripDetail() {
     await axios
       .patch(
         `http://172.20.10.4:8000/api/v1/tours/${trip._id}`,
-        {},
+        { userId },
         {
           headers: {
             token: token,
@@ -66,7 +66,9 @@ function TripDetail() {
         }
       )
       .then((res) => {
-        navigate("/home");
+        setBooked(res.data.data.upUser.booked);
+
+        navigate("/bookedtrips");
       })
       .catch((err) => {
         alert("Error!");

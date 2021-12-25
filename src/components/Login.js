@@ -14,9 +14,11 @@ function LoginPage() {
     setMail,
     pass,
     setPass,
-    token,
+
     setToken,
     setId,
+    setCreated,
+    setBooked,
   } = useContext(SocketContext);
 
   const login = async (e) => {
@@ -28,10 +30,11 @@ function LoginPage() {
         password: pass,
       })
         .then((res) => {
-          setId(res.data.user);
-
+          setId(res.data.user._id);
+          setBooked(res.data.user.booked);
+          setCreated(res.data.user.created);
           setToken(res.data.token);
-          console.log(token);
+
           setLogin(true);
           navigate("/home");
         })

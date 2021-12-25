@@ -8,7 +8,9 @@ import { SocketContext } from "./context/socketContext";
 import Navbar from "./components/Navbar";
 import UserDetails from "./components/UserDetails";
 import CreateTrip from "./components/CreateTrip";
+import Created from "./components/Created";
 import "./App.css";
+import Booked from "./components/Booked";
 function App() {
   const { LoggedIn } = useContext(SocketContext);
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="/userdetails/:id" element={<UserDetails />}></Route>
             <Route path="/tripdetail/:id" element={<TripDetail />}></Route>
             <Route path="/schedule" element={<CreateTrip />}></Route>
+            <Route path="/bookedtrips" element={<Booked />}></Route>
+            <Route path="/createdtrips" element={<Created />}></Route>
           </Routes>
         </div>
       </Router>

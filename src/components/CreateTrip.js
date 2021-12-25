@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function CreateTrip() {
-  const { userId, token } = useContext(SocketContext);
+  const { userId, token, setCreated } = useContext(SocketContext);
   const [source, setSource] = useState("");
   const [dest, setDest] = useState("");
   const [reason, setReason] = useState("");
@@ -39,13 +39,16 @@ function CreateTrip() {
           }
         )
         .then((res) => {
-          navigate("/home");
+          setCreated(res.data.data.upUser.created);
+
+          navigate("/createdtrips");
         })
         .catch((err) => {
           alert("Error in creating a trip, Try again!");
         });
     }
   };
+
   return (
     <div>
       <section className=" p-4" style={{ "background-color": "#eee" }}>
