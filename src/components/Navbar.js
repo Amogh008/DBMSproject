@@ -5,7 +5,7 @@ import "./../App.css";
 function Naavbar() {
   const { userId } = useContext(SocketContext);
   return (
-    <div className="App">
+    <div className="App" sytle={{}}>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
         <Link to="/home">
           <h2 className="navbar-brand" style={{ color: "white" }}>

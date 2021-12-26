@@ -14,7 +14,7 @@ import Booked from "./components/Booked";
 function App() {
   const { LoggedIn } = useContext(SocketContext);
   return (
-    <div>
+    <div className="App">
       <Router>
         {LoggedIn && <Navbar />}
         <div className="mw-100 App">

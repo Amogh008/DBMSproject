@@ -1,11 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../context/socketContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 function DateCheck() {
+  const navigate = useNavigate();
   const { token, userId } = useContext(SocketContext);
-
+  useEffect(() => {
+    const check = () => {
+      if (token === "") {
+        navigate("/login");
+      }
+    };
+    check();
+  });
   const [trips, setTrips] = useState([]);
   useEffect(() => {
     const fetch = async () => {
@@ -27,13 +36,14 @@ function DateCheck() {
   if (trips.length === 0) {
     return (
       <div>
-        <h2>No trips</h2>
+        <h2>No Booked Trips</h2>
       </div>
     );
   }
 
   return (
     <div>
+      <h1>Booked Trips</h1>
       {trips.length !== 0 && (
         <div className="row p-3">
           {trips.map((variant) => (
@@ -44,7 +54,7 @@ function DateCheck() {
                 key={variant._id}
               >
                 <Card
-                  bg="dark"
+                  bg="warning"
                   key={variant._id}
                   text="white"
                   style={{
