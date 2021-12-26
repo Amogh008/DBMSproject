@@ -1,10 +1,11 @@
-import { React, useEffect, useContext } from "react";
+import { React, useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SocketContext } from "../context/socketContext";
-
+import axios from "axios";
 function TripStatus() {
   const navigate = useNavigate();
-  const { token } = useContext(SocketContext);
+  const { token, userId } = useContext(SocketContext);
+  const [tripStat, setStatus] = useState([]);
   useEffect(() => {
     const check = () => {
       if (token === "") {
@@ -12,40 +13,46 @@ function TripStatus() {
       }
     };
     check();
-  });
+    const fetch = async () => {
+      await axios
+        .get(`http://172.20.10.4:8000/api/v1/coPass/status/${userId}`, {
+          headers: {
+            token: token,
+          },
+        })
+        .then((res) => {
+          setStatus(res.data.data.coPass.reverse());
+        })
+        .catch((err) => {});
+    };
+
+    fetch();
+  }, []);
 
   return (
     <div>
       <table className="table table-striped" style={{ width: "100%" }}>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Company</th>
-            <th>Email</th>
+            <th>Number</th>
+            <th>source</th>
+            <th>destination</th>
+            <th>id</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {
+          {tripStat.map((ele, index) => (
             <tr>
+              <td>{index + 1}</td>
+              <td>{ele.source}</td>
+              <td>{ele.destination}</td>
+              <td>{ele.tripId}</td>
               <td>
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                  width="32"
-                  height="32"
-                  class="rounded-circle my-n1"
-                  alt="Avatar"
-                />
-              </td>
-              <td>Garrett Winters</td>
-              <td>Good Guys</td>
-              <td>garrett@winters.com</td>
-              <td>
-                <span class="badge bg-success">Active</span>
+                <span class="badge bg-success">{ele.status}</span>
               </td>
             </tr>
-          }
+          ))}
         </tbody>
       </table>
     </div>

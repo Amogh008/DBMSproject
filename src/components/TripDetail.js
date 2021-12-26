@@ -128,6 +128,34 @@ function TripDetail() {
       });
   };
 
+  const completeTrip = async () => {
+    var todayDate = new Date();
+    todayDate = todayDate.toISOString().split("T")[0];
+    if (trip.startDate.split("T")[0] > todayDate) {
+      alert(trip.startDate.split("T")[0]);
+      alert("First complete the trip");
+    } else {
+      await axios
+        .delete(
+          `http://172.20.10.4:8000/api/v1/copass/${trip._id}`,
+
+          {
+            headers: {
+              token: token,
+            },
+          }
+        )
+        .then((res) => {
+          alert("Completed successfully!!");
+
+          navigate("/tripsStatus");
+        })
+        .catch((err) => {
+          alert("error completing the trip");
+        });
+    }
+  };
+
   return (
     <div>
       <div className="container my-5" style={{ "text-align": "center" }}>
@@ -263,6 +291,15 @@ function TripDetail() {
                     onClick={deleteTour}
                   >
                     Cancel Trip
+                  </button>
+                )}
+                {organizer._id === userId && (
+                  <button
+                    type="button"
+                    className="mt-4 ml-3 mb-0  btn btn-success btn-lg"
+                    onClick={completeTrip}
+                  >
+                    Set Complete
                   </button>
                 )}
 
