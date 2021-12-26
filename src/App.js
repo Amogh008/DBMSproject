@@ -11,6 +11,7 @@ import CreateTrip from "./components/CreateTrip";
 import Created from "./components/Created";
 import "./App.css";
 import Booked from "./components/Booked";
+import TripStatus from "./components/TripStatus";
 function App() {
   const { LoggedIn } = useContext(SocketContext);
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/schedule" element={<CreateTrip />}></Route>
             <Route path="/bookedtrips" element={<Booked />}></Route>
             <Route path="/createdtrips" element={<Created />}></Route>
+            <Route path="/tripsStatus" element={<TripStatus />}></Route>
           </Routes>
         </div>
       </Router>

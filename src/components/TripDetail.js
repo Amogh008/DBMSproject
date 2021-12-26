@@ -15,6 +15,7 @@ function TripDetail() {
   });
   const [organizer, setOrganizer] = useState({});
   const [date, setDate] = useState("");
+  const [coPass, setCoPass] = useState([]);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -37,6 +38,16 @@ function TripDetail() {
           setDate(date.reverse());
         })
         .catch((err) => {});
+      await axios
+        .get(`http://172.20.10.4:8000/api/v1/coPass/${trip._id}`, {
+          headers: {
+            token: token,
+          },
+        })
+        .then((res) => {
+          setCoPass(res.data.data.coPass);
+        })
+        .catch((err) => {});
     };
     fetch();
 
@@ -53,7 +64,7 @@ function TripDetail() {
         .catch((err) => {});
     };
     fetchUser();
-  }, [token, id, trip.creatorId, trip.startDate, date, navigate]);
+  }, [token, id, trip.creatorId, trip.startDate, date, trip._id, navigate]);
 
   const bookTrip = async () => {
     await axios
@@ -158,6 +169,38 @@ function TripDetail() {
                       {organizer.address}
                     </p>
                   </li>
+                </ul>
+              </div>
+              <div className="card-body p-1-9 p-xl-5">
+                <div className="mb-4">
+                  {/* <Link to={`/userdetails/${organizer._id}`}>
+                    <h1 className="h1 mb-0 font-weight-bold">
+                      {organizer.name}
+                    </h1>
+                  </Link> */}
+
+                  <h1 className="h3 mb-0 font-weight-bold text-success">
+                    Co-Passengers:
+                  </h1>
+                </div>
+                <ul className="list-unstyled mb-4">
+                  {coPass.length !== 0 &&
+                    coPass.map((co) => (
+                      <li className=" text-danger mb-3">
+                        <Link to={`/userdetails/${co._id}`}>
+                          <h1 className="h4 mb-0 font-weight-bold">
+                            {co.name}
+                          </h1>
+                        </Link>
+                      </li>
+                    ))}
+                  {coPass.length === 0 && (
+                    <li className=" text-danger mb-3">
+                      <h1 className="h4 mb-0 font-weight-bold">
+                        No Bookings Yet
+                      </h1>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>

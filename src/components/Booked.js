@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 function DateCheck() {
-  const navigate = useNavigate();
   const { token, userId } = useContext(SocketContext);
+  const navigate = useNavigate();
   useEffect(() => {
     const check = () => {
       if (token === "") {

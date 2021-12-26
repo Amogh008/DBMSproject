@@ -51,6 +51,11 @@ function Naavbar() {
               </Link>
             </li>
             <li className="nav-item ml-3">
+              <Link to={`tripsStatus`}>
+                <p>Trips-Status</p>
+              </Link>
+            </li>
+            <li className="nav-item ml-3">
               <a href="/login" className="text-danger">
                 <p>logout</p>
               </a>
