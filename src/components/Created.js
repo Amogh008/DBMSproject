@@ -36,14 +36,14 @@ function Created() {
   if (trips.length === 0) {
     return (
       <div>
-        <h2>No Created Trips</h2>
+        <h2 className="mw-100 text-center">No Created Trips</h2>
       </div>
     );
   }
 
   return (
     <div>
-      <h1>Created Trips</h1>
+      <h1 className="mw-100 text-center">Created Trips</h1>
       {trips.length !== 0 && (
         <div className="row p-3">
           {trips.map((variant) => (

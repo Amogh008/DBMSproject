@@ -36,14 +36,14 @@ function DateCheck() {
   if (trips.length === 0) {
     return (
       <div>
-        <h2>No Booked Trips</h2>
+        <h2 className="mw-100 text-center">No Booked Trips</h2>
       </div>
     );
   }
 
   return (
     <div>
-      <h1>Booked Trips</h1>
+      <h1 className="mw-100 text-center">Booked Trips</h1>
       {trips.length !== 0 && (
         <div className="row p-3">
           {trips.map((variant) => (

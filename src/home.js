@@ -19,7 +19,7 @@ function HomePage() {
   return (
     <div className="mw-100">
       {token === "" && <Navigate to="/login" replace={true} />}
-      <h1>Home Page</h1>
+      <h1 className="mw-100 text-center">Home Page</h1>
       <Trips />
     </div>
   );

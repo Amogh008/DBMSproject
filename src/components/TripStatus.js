@@ -38,6 +38,7 @@ function TripStatus() {
             <th>source</th>
             <th>destination</th>
             <th>id</th>
+            <th>date</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -48,9 +49,22 @@ function TripStatus() {
               <td>{ele.source}</td>
               <td>{ele.destination}</td>
               <td>{ele.tripId}</td>
-              <td>
-                <span class="badge bg-success">{ele.status}</span>
-              </td>
+              <td>{Date().split("T")[0]}</td>
+              {ele.status === "Completed" && (
+                <td>
+                  <span class="badge bg-success">{ele.status}</span>
+                </td>
+              )}
+              {ele.status === "Cancelled" && (
+                <td>
+                  <span class="badge bg-danger">{ele.status}</span>
+                </td>
+              )}
+              {ele.status === "Scheduled" && (
+                <td>
+                  <span class="badge bg-primary">{ele.status}</span>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

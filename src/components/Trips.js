@@ -11,7 +11,7 @@ function Trips() {
     const fetch = async () => {
       await axios
         .get(
-          "http://172.20.10.4:8000/api/v1/tours?sort=startDate&seatsLeft[gte]=0",
+          "http://172.20.10.4:8000/api/v1/tours?sort=startDate&seatsLeft[gt]=0",
           {
             headers: {
               token: token,
